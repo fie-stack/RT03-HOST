@@ -11,7 +11,7 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
-            font-size: 18px; /* Font besar untuk mudah baca */
+            font-size: 18px;
             line-height: 1.6;
         }
         header {
@@ -19,7 +19,41 @@
             color: white;
             text-align: center;
             padding: 20px;
+            position: relative;
         }
+        /* Slideshow di header */
+        .slideshow {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 200px; /* Tinggi untuk HP */
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        .slide.active {
+            display: block;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
         nav {
             background-color: #333;
             overflow: hidden;
@@ -31,7 +65,7 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
-            font-size: 20px; /* Menu besar */
+            font-size: 20px;
         }
         nav a:hover {
             background-color: #ddd;
@@ -60,7 +94,29 @@
         li {
             margin-bottom: 10px;
         }
-        /* Responsif untuk HP */
+        /* Button */
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px; /* Besar untuk HP */
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .detail {
+            display: none; /* Sembunyi dulu */
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e8f5e8;
+            border-left: 5px solid #4CAF50;
+        }
+        /* Responsif */
         @media screen and (max-width: 600px) {
             nav a {
                 float: none;
@@ -70,8 +126,13 @@
             body {
                 font-size: 16px;
             }
+            .btn {
+                width: 100%; /* Button penuh di HP */
+            }
+            .slide {
+                height: 150px; /* Lebih kecil di HP */
+            }
         }
-        /* Toggle menu untuk HP */
         .menu-toggle {
             display: none;
             background-color: #333;
@@ -97,7 +158,21 @@
 <body>
     <header>
         <h1>Website RT - Rukun Tetangga</h1>
-        <p>Selamat datang di website resmi RT kami. Klik menu di bawah untuk info.</p>
+        <p>Selamat datang! Klik panah untuk lihat info RT.</p>
+        <!-- Slideshow -->
+        <div class="slideshow">
+            <div class="slide active" style="background-image: url('https://via.placeholder.com/800x200/4CAF50/white?text=Foto+RT+1');">
+                <p style="position: absolute; bottom: 10px; left: 10px; color: white; font-size: 20px;">Foto Acara Gotong Royong</p>
+            </div>
+            <div class="slide" style="background-image: url('https://via.placeholder.com/800x200/333/white?text=Foto+RT+2');">
+                <p style="position: absolute; bottom: 10px; left: 10px; color: white; font-size: 20px;">Jadwal Ronda Terbaru</p>
+            </div>
+            <div class="slide" style="background-image: url('https://via.placeholder.com/800x200/FF5722/white?text=Foto+RT+3');">
+                <p style="position: absolute; bottom: 10px; left: 10px; color: white; font-size: 20px;">Laporan Keuangan RT</p>
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
     </header>
 
     <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
@@ -111,54 +186,93 @@
     <div class="container">
         <section id="acara">
             <h2>Program Acara</h2>
-            <p>Di sini daftar acara RT. Klik untuk lihat detail.</p>
+            <p>Daftar acara RT. Klik button untuk lihat detail.</p>
             <ul>
-                <li><strong>Gotong Royong:</strong> Setiap Minggu, pukul 08.00. Bersih-bersih lingkungan.</li>
-                <li><strong>Rapat RT:</strong> Tanggal 15 setiap bulan, pukul 19.00. Bahas masalah warga.</li>
-                <li><strong>Festival RT:</strong> Bulan Desember, acara bersama warga.</li>
+                <li><strong>Gotong Royong:</strong> Setiap Minggu, pukul 08.00.</li>
+                <li><strong>Rapat RT:</strong> Tanggal 15 setiap bulan, pukul 19.00.</li>
+                <li><strong>Festival RT:</strong> Bulan Desember.</li>
             </ul>
-            <p>(Anda bisa edit daftar ini di GitHub untuk tambah acara baru.)</p>
+            <button class="btn" onclick="toggleDetail('acara-detail')">Lihat Detail Acara</button>
+            <div id="acara-detail" class="detail">
+                <p>Detail tambahan: Gotong Royong meliputi bersih-bersih jalan dan taman. Rapat untuk bahas masalah warga. Festival dengan makan bersama.</p>
+            </div>
         </section>
 
         <section id="keuangan">
             <h2>Keuangan RT</h2>
-            <p>Laporan uang masuk dan keluar RT. Semua transparan.</p>
+            <p>Laporan uang RT. Klik untuk lihat lebih.</p>
             <ul>
-                <li><strong>Uang Masuk:</strong> Iuran warga Rp 50.000/bulan. Total: Rp 5.000.000.</li>
-                <li><strong>Uang Keluar:</strong> Listrik lampu jalan Rp 200.000/bulan. Perbaikan jalan Rp 1.000.000.</li>
-                <li><strong>Saldo Sekarang:</strong> Rp 3.800.000.</li>
+                <li><strong>Uang Masuk:</strong> Iuran Rp 50.000/bulan. Total: Rp 5.000.000.</li>
+                <li><strong>Uang Keluar:</strong> Listrik Rp 200.000/bulan.</li>
+                <li><strong>Saldo:</strong> Rp 3.800.000.</li>
             </ul>
-            <p>(Update angka ini setiap bulan di GitHub.)</p>
+            <button class="btn" onclick="toggleDetail('keuangan-detail')">Lihat Detail Keuangan</button>
+            <div id="keuangan-detail" class="detail">
+                <p>Detail: Iuran digunakan untuk listrik, perbaikan, dan acara. Laporan diperbarui setiap bulan oleh Bendahara RT.</p>
+            </div>
         </section>
 
         <section id="inventaris">
             <h2>Inventaris RT</h2>
-            <p>Barang-barang milik RT yang bisa dipinjam warga.</p>
+            <p>Barang RT yang bisa dipinjam.</p>
             <ul>
-                <li><strong>Alat Gotong Royong:</strong> Sapu, sekop, ember (5 set).</li>
-                <li><strong>Sound System:</strong> Untuk acara, 1 unit.</li>
-                <li><strong>Buku Tamu:</strong> Untuk rapat, 1 buku.</li>
+                <li><strong>Alat Gotong Royong:</strong> Sapu, sekop (5 set).</li>
+                <li><strong>Sound System:</strong> 1 unit.</li>
+                <li><strong>Buku Tamu:</strong> 1 buku.</li>
             </ul>
-            <p>Hubungi Ketua RT untuk pinjam. (Tambah barang baru di sini.)</p>
+            <button class="btn" onclick="toggleDetail('inventaris-detail')">Lihat Detail Inventaris</button>
+            <div id="inventaris-detail" class="detail">
+                <p>Detail: Pinjam alat dengan izin Ketua RT. Kembalikan dalam kondisi baik. Tambah inventaris jika perlu.</p>
+            </div>
         </section>
 
         <section id="ronda">
             <h2>Jadwal Ronda</h2>
-            <p>Jadwal ronda malam untuk keamanan RT.</p>
+            <p>Jadwal ronda malam.</p>
             <ul>
-                <li><strong>Senin:</strong> Kelompok A (Rumah 1-10), pukul 20.00-22.00.</li>
-                <li><strong>Selasa:</strong> Kelompok B (Rumah 11-20), pukul 20.00-22.00.</li>
-                <li><strong>Rabu:</strong> Kelompok C (Rumah 21-30), pukul 20.00-22.00.</li>
-                <li><strong>Dan seterusnya...</strong> Ganti setiap minggu.</li>
+                <li><strong>Senin:</strong> Kelompok A, pukul 20.00-22.00.</li>
+                <li><strong>Selasa:</strong> Kelompok B, pukul 20.00-22.00.</li>
+                <li><strong>Rabu:</strong> Kelompok C, pukul 20.00-22.00.</li>
             </ul>
-            <p>Jika ada perubahan, beri tahu via grup WA RT. (Edit jadwal di GitHub.)</p>
+            <button class="btn" onclick="toggleDetail('ronda-detail')">Lihat Detail Ronda</button>
+            <div id="ronda-detail" class="detail">
+                <p>Detail: Ronda bergantian setiap minggu. Jika sakit, ganti dengan warga lain. Prioritas keamanan RT.</p>
+            </div>
         </section>
     </div>
 
     <script>
+        // Toggle menu untuk HP
         function toggleMenu() {
             var nav = document.getElementById("nav-menu");
             nav.classList.toggle("show");
+        }
+
+        // Slideshow
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            slideIndex = (n + slides.length) % slides.length;
+            slides[slideIndex].classList.add("active");
+        }
+
+        function changeSlide(n) {
+            showSlides(slideIndex + n);
+        }
+
+        // Toggle detail untuk button
+        function toggleDetail(id) {
+            var detail = document.getElementById(id);
+            if (detail.style.display === "block") {
+                detail.style.display = "none";
+            } else {
+                detail.style.display = "block";
+            }
         }
     </script>
 </body>
