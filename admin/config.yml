@@ -6,11 +6,11 @@ media_folder: "uploads"
 public_folder: "/uploads"
 
 collections:
-  - name: "posts"
-    label: "Posting"
-    folder: "posts"
+  - name: "acara"
+    label: "Program Acara"
+    folder: "content/acara"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Judul", name: "title", widget: "string" }
       - { label: "Tanggal", name: "date", widget: "datetime" }
