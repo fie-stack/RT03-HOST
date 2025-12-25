@@ -6,40 +6,58 @@
 <title>Website RT</title>
 
 <style>
+/* ===== GLOBAL ===== */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
-    background: #f4f4f4;
-    font-size: 18px;
+    background: #ececec; /* abu elegan */
+    color: #333;
+    font-size: 17px;
 }
 
+/* ===== HEADER ===== */
 header {
-    background: #4CAF50;
+    background: linear-gradient(135deg, #4CAF50, #2e7d32);
     color: white;
-    padding: 20px;
+    padding: 30px 15px;
     text-align: center;
 }
 
+header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+header p {
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+/* ===== NAV ===== */
 nav {
-    background: #333;
+    background: #2f2f2f;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav a {
-    color: white;
-    padding: 14px 16px;
-    display: inline-block;
+    color: #f1f1f1;
+    padding: 14px 18px;
     text-decoration: none;
+    font-weight: 500;
 }
 
 nav a:hover {
-    background: #ddd;
-    color: black;
+    background: #4CAF50;
+    color: white;
 }
 
+/* ===== LAYOUT ===== */
 .container {
-    padding: 20px;
     max-width: 1000px;
-    margin: auto;
+    margin: 30px auto;
+    padding: 0 15px;
 }
 
 /* ===== PAGE SYSTEM ===== */
@@ -53,37 +71,61 @@ nav a:hover {
 
 /* ===== CARD ===== */
 section {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 h2 {
-    color: #4CAF50;
+    margin-top: 0;
+    color: #2e7d32;
 }
 
+/* ===== BUTTON ===== */
 .btn {
     background: #4CAF50;
     color: white;
-    padding: 12px 25px;
+    padding: 12px 26px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
+.btn:hover {
+    background: #43a047;
+}
+
+/* ===== DETAIL BOX ===== */
 .detail {
     display: none;
     margin-top: 15px;
-    background: #e8f5e8;
     padding: 15px;
+    background: #f1f8f4;
     border-left: 5px solid #4CAF50;
+    border-radius: 6px;
 }
 
-/* MOBILE */
+/* ===== LIST ===== */
+ul {
+    padding-left: 18px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* ===== MOBILE ===== */
 @media(max-width:600px){
-    nav a{
-        display:block;
+    header h1 {
+        font-size: 22px;
+    }
+    nav a {
+        width: 100%;
+        text-align: center;
     }
 }
 </style>
@@ -93,7 +135,7 @@ h2 {
 
 <header>
     <h1>Website RT - Rukun Tetangga</h1>
-    <p>Informasi resmi warga RT</p>
+    <p>Informasi resmi dan transparansi warga</p>
 </header>
 
 <nav>
@@ -106,62 +148,57 @@ h2 {
 
 <div class="container">
 
-    <!-- ===== BERANDA ===== -->
+    <!-- BERANDA -->
     <div id="home" class="page active">
         <section>
             <h2>Selamat Datang</h2>
             <p>
-                Website resmi RT untuk informasi acara, keuangan,
-                inventaris, dan jadwal ronda.
+                Website resmi RT sebagai pusat informasi kegiatan,
+                laporan keuangan, inventaris, dan jadwal ronda warga.
             </p>
         </section>
     </div>
 
-    <!-- ===== PROGRAM ACARA ===== -->
+    <!-- PROGRAM ACARA -->
     <div id="acara" class="page">
         <section>
             <h2>Program Acara RT</h2>
             <ul>
-                <li>Gotong Royong – Minggu 08.00</li>
-                <li>Rapat RT – Tanggal 15</li>
+                <li>Gotong Royong – Minggu, 08.00</li>
+                <li>Rapat RT – Tanggal 15 setiap bulan</li>
                 <li>Festival RT – Bulan Desember</li>
             </ul>
-
             <button class="btn" onclick="toggleDetail('acara-detail')">
                 Lihat Detail
             </button>
-
             <div id="acara-detail" class="detail">
-                Gotong royong untuk kebersihan lingkungan,
-                rapat membahas warga,
-                festival makan bersama.
+                Gotong royong fokus kebersihan lingkungan,
+                rapat untuk musyawarah warga,
+                dan festival sebagai ajang kebersamaan.
             </div>
         </section>
     </div>
 
-    <!-- ===== KEUANGAN ===== -->
+    <!-- KEUANGAN -->
     <div id="keuangan" class="page">
         <section>
             <h2>Keuangan RT</h2>
             <ul>
                 <li>Uang Masuk: Rp 5.000.000</li>
                 <li>Uang Keluar: Rp 1.200.000</li>
-                <li>Saldo: Rp 3.800.000</li>
+                <li><strong>Saldo: Rp 3.800.000</strong></li>
             </ul>
-
             <button class="btn" onclick="toggleDetail('uang-detail')">
                 Lihat Detail
             </button>
-
             <div id="uang-detail" class="detail">
-                Dana digunakan untuk listrik,
-                perbaikan fasilitas,
-                dan kegiatan RT.
+                Dana digunakan untuk listrik fasilitas,
+                perbaikan umum, dan kegiatan warga.
             </div>
         </section>
     </div>
 
-    <!-- ===== INVENTARIS ===== -->
+    <!-- INVENTARIS -->
     <div id="inventaris" class="page">
         <section>
             <h2>Inventaris RT</h2>
@@ -170,19 +207,17 @@ h2 {
                 <li>Sound System – 1 unit</li>
                 <li>Buku Tamu – 1 buah</li>
             </ul>
-
             <button class="btn" onclick="toggleDetail('inv-detail')">
                 Lihat Detail
             </button>
-
             <div id="inv-detail" class="detail">
-                Inventaris dapat dipinjam
-                dengan izin Ketua RT.
+                Inventaris dapat dipinjam dengan izin pengurus RT
+                dan wajib dikembalikan dalam kondisi baik.
             </div>
         </section>
     </div>
 
-    <!-- ===== RONDA ===== -->
+    <!-- RONDA -->
     <div id="ronda" class="page">
         <section>
             <h2>Jadwal Ronda</h2>
@@ -191,14 +226,12 @@ h2 {
                 <li>Selasa – Kelompok B</li>
                 <li>Rabu – Kelompok C</li>
             </ul>
-
             <button class="btn" onclick="toggleDetail('ronda-detail')">
                 Lihat Detail
             </button>
-
             <div id="ronda-detail" class="detail">
-                Ronda bergantian tiap minggu,
-                wajib hadir demi keamanan RT.
+                Ronda dilakukan bergiliran setiap minggu
+                demi menjaga keamanan lingkungan RT.
             </div>
         </section>
     </div>
@@ -207,8 +240,7 @@ h2 {
 
 <script>
 function showPage(pageId) {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
 }
 
